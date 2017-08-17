@@ -1,4 +1,4 @@
-package cn.com.sky.dubbo.server;
+package cn.com.sky.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +16,6 @@ public class Provider {
 	}
 
 	public static void main(String[] args) throws Exception {
-
-		/*
-		 * System.setProperty("projectName", "rebate-serviceabc-impl");
-		 * System.setProperty("appName", "gome_rebate_config"); System.setProperty("dubbo.port",
-		 * "20999");
-		 */
 
 		String configLocation = getPath() + "/provider.xml";
 

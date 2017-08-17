@@ -1,0 +1,2 @@
+logSessionFilter=cn.com.sky.filter.LogSessionFilter
+ipFilter=cn.com.sky.filter.LogIpFilter

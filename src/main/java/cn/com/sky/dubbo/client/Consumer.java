@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.alibaba.dubbo.rpc.RpcContext;
+
 import cn.com.sky.dubbo.client.service.HelloAction;
 import cn.com.sky.dubbo.server.service.DemoService;
 
@@ -24,21 +26,37 @@ public class Consumer {
 		final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(configLocation);
 
 		context.start();
-		logger.info("Shop Service started successfully");
+		logger.info("Consumer started successfully");
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
-				logger.info("Shutdown hook was invoked. Shutting down Shop Service.");
+				logger.info("Shutdown hook was invoked. Shutting down Consumer.");
 				context.close();
 			}
 		});
 
 		DemoService demoService = (DemoService) context.getBean("demoService"); // 获取远程服务代理
 
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10; i++) {
 			Thread t = new Thread(new MyThread(demoService));
 			t.start();
-
 		}
+
+		DemoService demoServiceSecond = (DemoService) context.getBean("demoServiceSecond"); // 获取远程服务代理
+
+		for (int i = 0; i < 10; i++) {
+			Thread t = new Thread(new MyThread(demoServiceSecond));
+			t.start();
+		}
+
+		DemoService demoServiceThird = (DemoService) context.getBean("demoServiceThird"); // 获取远程服务代理
+
+		for (int i = 0; i < 10; i++) {
+			Thread t = new Thread(new MyThread(demoServiceThird));
+			t.start();
+		}
+
+		String sessionId = RpcContext.getContext().getAttachment("key");
+		System.out.println(sessionId);
 
 		// long begin = System.currentTimeMillis();
 		// System.out.println("begin:" + begin);
@@ -69,6 +87,6 @@ class MyThread implements Runnable {
 	@Override
 	public void run() {
 		String result = ds.sayHello("world"); // 执行远程方法
-		System.out.println("result: " + result);
+		System.out.println("result--> " + result);
 	}
 }

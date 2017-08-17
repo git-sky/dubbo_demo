@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">
+
+	<dubbo:application name="cache-provider" />
+
+	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<dubbo:service interface="cn.com.sky.cache.CacheService"
+		ref="cacheService" />       <!-- 和本地bean一样实现服务 -->
+
+	<bean id="cacheService" class="cn.com.sky.cache.CacheServiceImpl" />
+
+
+	<dubbo:service cache="lru" />
+	<dubbo:service>
+		<dubbo:method cache="lru" />
+	</dubbo:service> <!-- 方法级缓存 -->
+	<dubbo:provider cache="xxx,yyy" /> <!-- 缺省值设置，当<dubbo:service>没有配置cache属性时，使用此配置 -->
+
+</beans>  

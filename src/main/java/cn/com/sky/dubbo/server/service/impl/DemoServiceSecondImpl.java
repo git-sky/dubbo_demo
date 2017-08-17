@@ -3,25 +3,20 @@ package cn.com.sky.dubbo.server.service.impl;
 import cn.com.sky.dubbo.server.User;
 import cn.com.sky.dubbo.server.service.DemoService;
 
-import com.alibaba.dubbo.rpc.RpcContext;
-
-public class DemoServiceImpl implements DemoService {
+public class DemoServiceSecondImpl implements DemoService {
 
 	public String sayHello(String name) {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String sessionId = RpcContext.getContext().getAttachment("key");
-		System.out.println(sessionId);
-
-		return "provider: Hello '" + name + "'";
+		return "provider: Hello second impl '" + name + "'";
 	}
 
 	@Override
 	public void addUser(User u) {
-		System.out.println("add user successfully ....");
+		System.out.println("add user successfully second impl ....");
 	}
 
 	@Override

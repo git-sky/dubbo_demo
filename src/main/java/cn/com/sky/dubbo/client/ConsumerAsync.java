@@ -34,10 +34,10 @@ public class ConsumerAsync {
 		final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(configLocation);
 
 		context.start();
-		logger.info("Shop Service started successfully");
+		logger.info("ConsumerAsync started successfully");
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
-				logger.info("Shutdown hook was invoked. Shutting down Shop Service.");
+				logger.info("Shutdown hook was invoked. Shutting down ConsumerAsync.");
 				context.close();
 			}
 		});

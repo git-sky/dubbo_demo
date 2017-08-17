@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">
+
+	<dubbo:application name="cache-consumer" />
+
+	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+
+	<!-- cache="true" 缓存此接口的数据 ，默认缓存大小（cache.size）为： 1000 ，默认LRU策略 -->
+	<dubbo:reference id="cacheService" interface="cn.com.sky.cache.CacheService"
+		cache="true" />
+</beans>  

@@ -1,7 +1,7 @@
-package cn.com.sky.dubbo.server.service.impl;
+package cn.com.sky.filter.server.service.impl;
 
 import cn.com.sky.dubbo.server.User;
-import cn.com.sky.dubbo.server.service.DemoService;
+import cn.com.sky.filter.server.service.DemoService;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 
@@ -14,9 +14,9 @@ public class DemoServiceImpl implements DemoService {
 			e.printStackTrace();
 		}
 		String sessionId = RpcContext.getContext().getAttachment("key");
-		System.out.println(sessionId);
+		String localhost = RpcContext.getContext().getAttachment("localhost");
 
-		return "provider: Hello '" + name + "'";
+		return "provider: Hello '" + name + "'" + "  sessionId: " + sessionId + "  localhost: " + localhost;
 	}
 
 	@Override
