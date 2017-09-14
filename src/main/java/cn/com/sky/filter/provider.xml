@@ -14,8 +14,8 @@
 
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="hello_provider" />
-
-	<dubbo:provider filter="logSessionFilter,ipFilter" />
+<!-- 
+	<dubbo:provider filter="logSessionFilter,ipFilter" /> -->
 
 
 	<!-- 使用zookeeper注册中心暴露服务地址 -->
